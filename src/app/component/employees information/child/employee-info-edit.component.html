@@ -1,0 +1,185 @@
+<div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="row">
+                <h3 mat-dialog-title>REGISTER OR EDIT !!</h3>
+
+                <form [formGroup]="employeeEditInfoForm" (ngSubmit)="save()">
+                    <mat-dialog-content>
+                        <div class="form-group" [ngClass]="{'has-error': (employeeEditInfoForm.get
+                            ('firstName').touched || employeeEditInfoForm.get('firstName').dirty) && !employeeEditInfoForm.get('firstName').valid }">
+                            <label>First Name:</label>
+                            <input tabindex="1" formControlName="firstName" type="text" class="form-control form-control-sm " placeholder="firstName..."
+                            />
+                            <span class="help-block" *ngIf="(employeeEditInfoForm.get('firstName').touched || 
+                                employeeEditInfoForm.get('firstName').dirty) && employeeEditInfoForm.get('firstName').errors">
+                                <span *ngIf="employeeEditInfoForm.get('firstName').errors.required">
+                                    Please enter your First Name.
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{'has-error': (employeeEditInfoForm.get
+                            ('lastName').touched || employeeEditInfoForm.get('lastName').dirty) && !employeeEditInfoForm.get('lastName').valid }">
+                            <label>Last Name:</label>
+                            <input tabindex="2" formControlName="lastName" type="text" class="form-control form-control-sm " placeholder="lastName..."
+                            />
+                            <span class="help-block" *ngIf="(employeeEditInfoForm.get('lastName').touched || 
+                                employeeEditInfoForm.get('lastName').dirty) && employeeEditInfoForm.get('lastName').errors">
+                                <span *ngIf="employeeEditInfoForm.get('lastName').errors.required">
+                                    Please enter your Last Name.
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{'has-error': (employeeEditInfoForm.get
+                            ('email').touched || employeeEditInfoForm.get('email').dirty) && !employeeEditInfoForm.get('email').valid }">
+                            <label>Email:</label>
+                            <input tabindex="3" formControlName="email" type="text" class="form-control form-control-sm " placeholder="email..." />
+                            <span class="help-block" *ngIf="(employeeEditInfoForm.get('email').touched || 
+                                employeeEditInfoForm.get('email').dirty) && employeeEditInfoForm.get('email').errors">
+                                <span *ngIf="employeeEditInfoForm.get('email').errors.required">
+                                    Please enter your Email Address.
+                                </span>
+                                <span *ngIf="employeeEditInfoForm.get('email').errors.pattern">
+                                    Please Enter The Valid Email Address.
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{'has-error': (employeeEditInfoForm.get
+                            ('password').touched || employeeEditInfoForm.get('password').dirty) && !employeeEditInfoForm.get('password').valid }">
+                            <label>Password:</label>
+                            <input tabindex="4" formControlName="password" type="password" class="form-control form-control-sm " placeholder="password..."
+                            />
+                            <span class="help-block" *ngIf="(employeeEditInfoForm.get('password').touched || 
+                                employeeEditInfoForm.get('password').dirty) && employeeEditInfoForm.get('password').errors">
+                                <span *ngIf="employeeEditInfoForm.get('password').errors.required">
+                                    Please enter Password.
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gender:</label>
+                            <mat-select placeholder="Select Gender" tabindex="5" formControlName="gender" class="form-control">
+                                <mat-option *ngFor="let c of Gender | async" [value]="c.name">
+                                    {{c.name}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Country:</label>
+                            <mat-select placeholder="Select Country" tabindex="6" formControlName="country" class="form-control">
+                                <ngx-mat-select-search [formControl]="countryFilterCtrl"></ngx-mat-select-search>
+                                <mat-option *ngFor="let c of filteredCountries | async" [value]="c.name">
+                                    {{c.name}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Choose Favourite Color:</label>
+                            <mat-select tabindex="7" formControlName="color" class="form-control" placeholder="Favourite Color" [multiple]="true">
+                                <ngx-mat-select-search [formControl]="colorFilterCtrl"></ngx-mat-select-search>
+                                <mat-option *ngFor="let c of filteredColor | async" [value]="c.name">
+                                    {{c.name}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Qualification:</label>
+                            <mat-select placeholder="Select qualification" tabindex="8" formControlName="qualification" class="form-control">
+                                <mat-option *ngFor="let c of Qualification | async" [value]="c.name">
+                                    {{c.name}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{'has-error': (employeeEditInfoForm.get
+                        ('dateofbirth').touched || employeeEditInfoForm.get('dateofbirth').dirty) && !employeeEditInfoForm.get('dateofbirth').valid }">
+                            <label>Date Of Birth:</label>
+                            <input tabindex="8" formControlName="dateofbirth" type="text" class="form-control form-control-sm " placeholder="date of birth..."
+                            />
+                            <span class="help-block" *ngIf="(employeeEditInfoForm.get('dateofbirth').touched || 
+                            employeeEditInfoForm.get('dateofbirth').dirty) && employeeEditInfoForm.get('dateofbirth').errors">
+                                <span *ngIf="employeeEditInfoForm.get('dateofbirth').errors.required">
+                                    Please enter Your Date of Birth.
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{'has-error': (employeeEditInfoForm.get
+                            ('address').touched || employeeEditInfoForm.get('address').dirty) && !employeeEditInfoForm.get('address').valid }">
+                            <label>Address:</label>
+                            <input tabindex="9" formControlName="address" type="text" class="form-control form-control-sm " placeholder="address..."
+                            />
+                            <span class="help-block" *ngIf="(employeeEditInfoForm.get('address').touched || 
+                                employeeEditInfoForm.get('address').dirty) && employeeEditInfoForm.get('address').errors">
+                                <span *ngIf="employeeEditInfoForm.get('address').errors.required">
+                                    Please enter Your Address.
+                                </span>
+                            </span>
+                        </div>
+
+                        <!-- <div tabindex="10" formArrayName="addresses" *ngFor="let d of addresses?.controls; let i=index">
+                            <div [formGroupName]="i">
+                                <div class="form-group">
+                                    <label>Address {{i+1}}:</label>
+                                    <input class="form-control" class="form-control form-control-sm" type="text" formControlName="addresses" placeholder="other address">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button tabindex="11" type="button" (click)="add()" class="btn btn-primary btn-sm">Add </button>
+                            <button tabindex="12" type="button" (click)="removeArray(i)" class="btn btn-primary btn-sm">Remove </button>
+                        </div> -->
+
+                        <div formArrayName="addresses">
+                            <div class="form-group" *ngFor="let d of addresses.controls; let i=index">
+                                <label [attr.for]="i">OtherAddress</label>
+                                <input class="form-control" [id]="i" type="text" placeholder="other" [formControlName]="i" />
+                            </div>
+                            <div class="row">
+                                <button class="btn btn-primary" type="button" (click)="addother()">Add
+                                </button>
+                                <button class="btn btn-danger pull-right" type="button" (click)="removeArray(i)">Remove</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Role:</label>
+                            <mat-select placeholder="Select Role" tabindex="13" formControlName="role" class="form-control">
+                                <mat-option *ngFor="let c of Role | async" [value]="c.name">
+                                    {{c.name}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Status:</label>
+                            <select tabindex="14" class="form-control" formControlName="status">
+                                <option value="">Status</option>
+                                <option value="1">Verified</option>
+                                <option value="2">InActive</option>
+                                <option value="3">Rejected</option>
+                                <option value="4">Active</option>
+                            </select>
+                        </div>
+                    </mat-dialog-content>
+
+                    <mat-dialog-actions>
+                        <div class="row">
+                            <button tabindex="15" class="btn btn-primary" type="submit">Save</button>
+                            <button tabindex="16" class="btn btn-default" (click)="cancel()">Cancel</button>
+                        </div>
+                    </mat-dialog-actions>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

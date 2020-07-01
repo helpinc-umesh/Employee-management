@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="col-md-12 table-responsive">
+        <h1>My Profile</h1>
+        <!-- <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>S.N</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Gender</th>
+                    <th>Qualification</th>
+                    <th>Address</th>
+                    <th>Date of birth</th>
+                    <th>Role</th>
+                    <th>Country</th>
+                    <th>Color</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{loggedUser?.id}}</td>
+                    <td>{{loggedUser?.firstName}} {{loggedUser?.lastName}}</td>
+                    <td>{{loggedUser?.email}}</td>
+                    <td>{{loggedUser?.password}}</td>
+                    <td>{{loggedUser?.gender}}</td>
+                    <td>{{loggedUser?.qualification}}</td>
+                    <td>{{loggedUser?.address}}</td>
+                    <td>{{loggedUser?.dateofbirth}}</td>
+                    <td>{{loggedUser?.role}}</td>
+                    <td>{{loggedUser?.country}}</td>
+                    <td>{{loggedUser?.color}}</td>
+                    <td>
+                        <span style="display: inline-block;" class="animated label" [ngClass]="{ ' label-info':loggedUser?.status==1,
+                        ' label-warning':loggedUser?.status==2,
+                        ' label-danger':loggedUser?.status==3,
+                        ' label-success':loggedUser?.status==4}">
+                            {{loggedUser?.status==1 ? 'Verified' : loggedUser?.status==2? 'InActive': loggedUser?.status==3 ? 'Rejected': loggedUser?.status==4?
+                            'Active':''}}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table> -->
+
+        <div class="thumbanil">
+            <div class="row">
+                <div class="col-md-3"><h4>First Name: {{loggedUser?.firstName}}</h4></div>
+                <div class="col-md-5"><h4>Last Name: {{loggedUser?.lastName}}</h4></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3"><h4>Email: {{loggedUser?.email}}</h4></div>
+                <div class="col-md-5"><h4>Password: {{loggedUser?.password}}</h4></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3"><h4>Gender: {{loggedUser?.gender}}</h4></div>
+                <div class="col-md-5"><h4>Qualification: {{loggedUser?.qualification}}</h4></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3"><h4>Address: {{loggedUser?.address}} {{loggedUser?.addresses}}</h4></div>
+                <div class="col-md-5"><h4>Date of Birth: {{loggedUser?.dateofbirth}}</h4></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3"><h4>Role: {{loggedUser?.role}}</h4></div>
+                <div class="col-md-5"><h4>Country: {{loggedUser?.country}}</h4></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3"><h4>Fav.Color: {{loggedUser?.color}}</h4></div>
+                <div class="col-md-5"><h4>Status: 
+                    <span style="display: inline-block;" class="animated label" [ngClass]="{ ' label-info':loggedUser?.status==1,
+                    ' label-warning':loggedUser?.status==2,
+                    ' label-danger':loggedUser?.status==3,
+                    ' label-success':loggedUser?.status==4}">
+                        {{loggedUser?.status==1 ? 'Verified' : loggedUser?.status==2? 'InActive': loggedUser?.status==3 ? 'Rejected': loggedUser?.status==4?
+                        'Active':''}}
+                    </span>
+                </h4></div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" (click)="onEdit(loggedUser?.id)">Edit</button>
+        <button class="btn btn-default" (click)="onDelete(loggedUser?.id)">Delete</button>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+<div class="container">
+    <h3>Employee Information</h3>
+    <div class="example-container">
+
+        <div class="example-header">
+            <button class="btn btn-primary pull-right" (click)="addOrUpdate()">Add</button>
+            <button *ngIf="this.selection.selected.length>0" class="btn btn-primary" (click)="onDeleteRows()">Delete Selection</button>
+            <button *ngIf="this.selection.selected.length>0" class="btn btn-default" mat-button [matMenuTriggerFor]="menu">Change status</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="select(1)">Verified</button>
+                <button mat-menu-item (click)="select(2)">InActive</button>
+                <button mat-menu-item (click)="select(3)">Rejected</button>
+                <button mat-menu-item (click)="select(4)">Active</button>
+            </mat-menu>
+        </div>
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="details">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell (click)="expandRow(index)" *matCellDef="let row; let index = index">
+                    <a style="cursor: pointer;" title="expand">
+                        <i class="font-grey-salsa glyphicon " [ngClass]="{'glyphicon-minus':expandedRow===index,'glyphicon-plus':expandedRow !==index}"></i>
+                    </a>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="checkbox">
+                <mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row.id) : null" [checked]="selection.isSelected(row.id)">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+                <mat-cell *matCellDef="let d"> {{d.id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                <mat-cell *matCellDef="let d"> {{d.firstName}} {{d.lastName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                <mat-cell *matCellDef="let d"> {{d.email}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="password">
+                <mat-header-cell *matHeaderCellDef > Password </mat-header-cell>
+                <mat-cell *matCellDef="let d">{{d.password}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="qualification">
+                <mat-header-cell *matHeaderCellDef> Qualification </mat-header-cell>
+                <mat-cell *matCellDef="let d"> {{d.qualification}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dateofbirth">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Date of birth </mat-header-cell>
+                <mat-cell *matCellDef="let d"> {{d.dateofbirth}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="address">
+                <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+                <mat-cell *matCellDef="let d"> {{d.address}}
+                    <div *ngIf="d.addresses.length ===1">,{{d.addresses}}</div>
+                    <div style="font-size: 10px;" *ngIf="d.addresses.length >1">.+more...</div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="gender">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
+                <mat-cell *matCellDef="let d"> {{d.gender}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="country">
+                <mat-header-cell *matHeaderCellDef> Country </mat-header-cell>
+                <mat-cell *matCellDef="let d"> {{d.country}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="color">
+                <mat-header-cell *matHeaderCellDef> Color </mat-header-cell>
+                <mat-cell *matCellDef="let d">{{d.color}}
+                    <!-- <div *ngIf="d.color.length === 1">{{d.color}}</div>
+                    <div *ngIf="d.color.length >1">more..+{{d.color.length}}</div> -->
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <span style="display: inline-block;" id="state-{{row.id}}" class="animated label" [ngClass]="{ ' label-info':row.status==1,
+                                        ' label-warning':row.status==2,
+                                        ' label-danger':row.status==3,
+                                        ' label-success':row.status==4}">
+                        {{row.status==1 ? 'Verified' : row.status==2? 'InActive': row.status==3 ? 'Rejected': row.status==4? 'Active':''}}
+                    </span>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="role">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+                <mat-cell *matCellDef="let d"> {{d.role}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+                <mat-cell *matCellDef="let d">
+                    <button (click)="addOrUpdate(d.id)" class="btn btn-primary btn-sm">
+                        <i class="fa fa-pencil-square"></i>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"
+             #cdkrow><!-- let index =index" id="row-{{row.id}}" -->
+            </mat-row>
+        </mat-table>
+        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+        </mat-paginator>
+    </div>
+</div>
+

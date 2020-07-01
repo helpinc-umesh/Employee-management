@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <button *ngIf="this.selection.selected.length > 0" (click)="onDelete()" class="btn btn-primary">Delete</button>
+            <button (click)="add(0)" class="btn btn-primary pull-right">Add</button>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                            </mat-checkbox>
+                        </th>
+                        <th>S.N</th>
+                        <th>Country</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let d of countries">
+                        <td>
+                            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(d.id) : null" [checked]="selection.isSelected(d.id)">
+                            </mat-checkbox>
+                        </td>
+                        <td>{{d?.id}}</td>
+                        <td>{{d?.name}}</td>
+                        <td>
+                            <button (click)="add(d.id)" class="btn btn-primary">edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

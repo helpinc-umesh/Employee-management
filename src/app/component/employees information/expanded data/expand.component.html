@@ -1,0 +1,47 @@
+<div class="container" *ngIf="childData">
+    <h4>
+        <b>Employee Details..</b>
+    </h4>
+    <div class="row font">
+        <div class="col-md-12">
+                <div class="row">
+                        <div class="col-md-3"><h4>First Name: {{childData?.firstName}}</h4></div>
+                        <div class="col-md-5"><h4>Last Name: {{childData?.lastName}}</h4></div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-md-3"><h4>Email: {{childData?.email}}</h4></div>
+                        <div class="col-md-5"><h4>Password: {{childData?.password}}</h4></div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-md-3"><h4>Gender: {{childData?.gender}}</h4></div>
+                        <div class="col-md-5"><h4>Qualification: {{childData?.qualification}}</h4></div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-md-3"><h4>Address: {{childData?.address}},{{childData?.addresses}}</h4></div>
+                        <div class="col-md-5"><h4>Date of Birth: {{childData?.dateofbirth}}</h4></div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-md-3"><h4>Role: {{childData?.role}}</h4></div>
+                        <div class="col-md-5"><h4>Country: {{childData?.country}}</h4></div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-md-3"><h4>Fav.Color: {{childData?.color}}</h4></div>
+                        <div class="col-md-5"><h4>Status: 
+                                <span style="display: inline-block;" class="animated label" [ngClass]="{ ' label-info':childData?.status==1,
+                                ' label-warning':childData?.status==2,
+                                ' label-danger':childData?.status==3,
+                                ' label-success':childData?.status==4}">
+                                    {{childData?.status==1 ? 'Verified' : childData?.status==2? 'InActive': childData?.status==3 ? 'Rejected': childData?.status==4?
+                                    'Active':''}}
+                                </span>
+                        </h4></div>
+                    </div>
+            <hr>
+        </div>
+    </div>
+</div>

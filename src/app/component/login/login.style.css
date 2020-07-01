@@ -1,0 +1,15 @@
+.login{
+    background-color:rgba(213, 218, 223, 0.603);
+    padding:50px;
+  }
+  .height {
+    height: 120px;
+    width:100%;
+    background-color: rgb(57, 60, 63);
+    margin: 0px;
+    padding:0px;
+    color:white;
+}
+.bottom{
+  height:600px;
+}

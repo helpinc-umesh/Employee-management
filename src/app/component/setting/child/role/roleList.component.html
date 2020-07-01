@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <button (click)="add(0)" class="btn btn-primary pull-right">Add</button>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>S.N</th>
+                        <th>Qualification</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let d of roles">
+                        <td>{{d?.id}}</td>
+                        <td>{{d?.name}}</td>
+                        <td><button (click)="add(d.id)" class="btn btn-primary">edit</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
